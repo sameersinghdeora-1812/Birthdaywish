@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 19th Birthday — My Fav Person 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --deep: #1a1a2e;
+    --rose-gold: #c9a96e;
+    --blush: #f4a7b9;
+    --blush-light: #fde8ee;
+    --cream: #fdf6ec;
+    --gold: #e8c97e;
+    --text-dark: #2c1a0e;
+    --white: #ffffff;
+    --horror-bg: #0a0005;
+    --horror-red: #8b0000;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--navy); color:var(--cream); font-family:'DM Sans',sans-serif; overflow-x:hidden; cursor:none; }
+
+  /* CURSOR */
+  #cursor { position:fixed; width:18px; height:18px; background:radial-gradient(circle,var(--blush),var(--rose-gold)); border-radius:50%; pointer-events:none; z-index:99999; transform:translate(-50%,-50%); mix-blend-mode:screen; }
+  .cursor-trail { position:fixed; border-radius:50%; pointer-events:none; z-index:99998; transform:translate(-50%,-50%); animation:trailFade 0.8s ease forwards; }
+  @keyframes trailFade { 0%{opacity:0.8;transform:translate(-50%,-50%) scale(1)} 100%{opacity:0;transform:translate(-50%,-50%) scale(0)} }
+
+  /* PROGRESS */
+  #progress-bar { position:fixed; top:0; left:0; height:3px; z-index:9999; background:linear-gradient(90deg,var(--blush),var(--rose-gold),var(--gold)); width:0%; box-shadow:0 0 10px var(--blush); transition:width 0.1s; }
+  #heartbeat { position:fixed; top:6px; right:14px; z-index:9999; font-size:16px; animation:heartPulse 1.2s ease infinite; }
+  @keyframes heartPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+
+  /* LOADER */
+  #loader { position:fixed; inset:0; z-index:99999; background:var(--navy); display:flex; flex-direction:column; align-items:center; justify-content:center; transition:opacity 1s ease; }
+  #loader.hide { opacity:0; pointer-events:none; }
+  .loader-heart { font-size:60px; animation:loaderBeat 0.8s ease infinite; }
+  @keyframes loaderBeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+  .loader-text { font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:var(--blush); margin-top:20px; letter-spacing:2px; }
+  .loader-dots span { display:inline-block; animation:dotBounce 1.2s ease infinite; color:var(--gold); }
+  .loader-dots span:nth-child(2){animation-delay:.2s} .loader-dots span:nth-child(3){animation-delay:.4s}
+  @keyframes dotBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .loader-bar { width:200px; height:3px; background:rgba(255,255,255,.1); border-radius:99px; margin-top:30px; overflow:hidden; }
+  .loader-fill { height:100%; background:linear-gradient(90deg,var(--blush),var(--gold)); animation:loaderFill 2.5s ease forwards; }
+  @keyframes loaderFill { 0%{width:0%} 100%{width:100%} }
+
+  /* STARS BG */
+  #stars-canvas { position:fixed; inset:0; pointer-events:none; z-index:0; }
+
+  /* NAV */
+  nav { position:fixed; top:12px; left:50%; transform:translateX(-50%); z-index:999; background:rgba(13,27,42,.75); backdrop-filter:blur(20px); border:1px solid rgba(201,169,110,.2); border-radius:50px; padding:10px 28px; display:flex; gap:24px; align-items:center; }
+  nav a { color:var(--cream); text-decoration:none; font-size:.78rem; letter-spacing:1px; opacity:.7; transition:all .3s; }
+  nav a:hover { opacity:1; color:var(--gold); }
+
+  section { position:relative; z-index:1; }
+
+  /* HERO */
+  #hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:40px 20px; overflow:hidden; }
+  .hero-greeting { font-size:.9rem; letter-spacing:4px; color:var(--rose-gold); text-transform:uppercase; margin-bottom:20px; animation:fadeUp 1s ease .5s both; }
+  .hero-name { font-family:'Playfair Display',serif; font-size:clamp(4rem,12vw,9rem); font-weight:900; line-height:1; background:linear-gradient(135deg,var(--blush) 0%,var(--gold) 40%,var(--rose-gold) 70%,var(--blush) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; background-size:200% 200%; animation:nameShimmer 4s ease infinite, fadeUp 1s ease .7s both; filter:drop-shadow(0 0 40px rgba(244,167,185,.4)); letter-spacing:-2px; }
+  @keyframes nameShimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+  .hero-sub { font-family:'Cormorant Garamond',serif; font-size:clamp(1.2rem,3vw,2rem); font-style:italic; color:var(--blush); margin-top:16px; animation:fadeUp 1s ease .9s both; }
+  .hero-years { margin-top:40px; font-family:'Caveat',cursive; font-size:1.4rem; color:var(--gold); animation:fadeUp 1s ease 1.1s both; }
+  .hero-quote { max-width:600px; margin:30px auto 0; font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:rgba(253,246,236,.75); line-height:1.8; animation:fadeUp 1s ease 1.3s both; }
+  .hero-scroll { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; color:rgba(255,255,255,.4); font-size:.75rem; letter-spacing:2px; animation:bounceScroll 2s ease infinite; }
+  @keyframes bounceScroll { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(10px)} }
+  .scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,var(--rose-gold),transparent); }
+  .petal { position:absolute; animation:petalFloat linear infinite; pointer-events:none; opacity:.6; }
+  @keyframes petalFloat { 0%{transform:translateY(-20px) rotate(0deg);opacity:0} 10%{opacity:.7} 90%{opacity:.5} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+  /* COUNTER */
+  #counter-section { padding:20px; text-align:center; background:linear-gradient(180deg,transparent,rgba(201,169,110,.05),transparent); }
+  #birthday-counter { font-family:'Caveat',cursive; font-size:1.5rem; color:var(--gold); }
+
+  /* SECTION TITLE */
+  .section-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,5vw,3.5rem); text-align:center; margin-bottom:60px; background:linear-gradient(135deg,var(--blush),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+  /* TIMELINE */
+  #timeline { padding:100px 20px; max-width:900px; margin:0 auto; }
+  .timeline-wrap { position:relative; }
+  .timeline-line { position:absolute; left:50%; top:0; bottom:0; width:2px; background:linear-gradient(to bottom,transparent,var(--rose-gold),var(--blush),var(--gold),transparent); transform:translateX(-50%); }
+  .timeline-item { display:flex; align-items:center; margin-bottom:60px; opacity:0; transform:translateY(40px); transition:all .7s ease; }
+  .timeline-item.visible { opacity:1; transform:translateY(0); }
+  .timeline-item:nth-child(odd) { flex-direction:row-reverse; }
+  .timeline-content { width:45%; background:rgba(255,255,255,.04); border:1px solid rgba(201,169,110,.2); border-radius:20px; padding:24px; backdrop-filter:blur(10px); transition:transform .3s,border-color .3s; }
+  .timeline-content:hover { transform:translateY(-4px); border-color:rgba(201,169,110,.5); }
+  .timeline-item:nth-child(odd) .timeline-content { text-align:right; }
+  .timeline-year { font-family:'Playfair Display',serif; font-size:2rem; color:var(--rose-gold); font-weight:700; }
+  .timeline-age { font-family:'Caveat',cursive; font-size:1rem; color:var(--gold); margin-top:2px; }
+  .timeline-text { font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:rgba(253,246,236,.85); margin-top:10px; line-height:1.7; }
+  .timeline-dot { width:16px; height:16px; background:var(--rose-gold); border-radius:50%; position:absolute; left:50%; transform:translateX(-50%); box-shadow:0 0 20px var(--blush); z-index:2; }
+  .timeline-spacer { width:10%; }
+
+  /* DISTANCE */
+  #distance { padding:100px 20px; background:linear-gradient(180deg,transparent,rgba(201,169,110,.04),transparent); }
+  .distance-inner { max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr auto 1fr; gap:40px; align-items:center; }
+  .city-card { background:rgba(255,255,255,.04); border:1px solid rgba(201,169,110,.2); border-radius:24px; padding:40px 30px; text-align:center; }
+  .city-emoji { font-size:3rem; }
+  .city-label { font-family:'Caveat',cursive; font-size:1.1rem; color:var(--gold); margin-top:10px; }
+  .city-name { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--cream); margin-top:6px; }
+  .distance-thread { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .thread-line { width:2px; height:80px; background:linear-gradient(to bottom,var(--blush),var(--rose-gold)); animation:threadPulse 2s ease infinite; }
+  @keyframes threadPulse { 0%,100%{opacity:.5} 50%{opacity:1} }
+  .thread-heart { font-size:2rem; animation:heartPulse 1.5s ease infinite; }
+  .distance-quote { text-align:center; font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-style:italic; color:var(--blush); max-width:600px; margin:50px auto 0; }
+
+  /* BUTTONS SECTION */
+  #buttons-section { padding:100px 20px; max-width:1100px; margin:0 auto; }
+  .btn-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; margin-top:50px; }
+  .feature-btn { position:relative; overflow:hidden; background:rgba(255,255,255,.04); border:1px solid rgba(201,169,110,.25); border-radius:20px; padding:28px 24px; cursor:pointer; text-align:center; transition:all .3s ease; font-family:'DM Sans',sans-serif; color:var(--cream); }
+  .feature-btn::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at center,rgba(244,167,185,.1),transparent 70%); opacity:0; transition:opacity .3s; }
+  .feature-btn:hover { border-color:var(--rose-gold); transform:translateY(-4px); box-shadow:0 20px 50px rgba(244,167,185,.15); }
+  .feature-btn:hover::before { opacity:1; }
+  .feature-btn:active { transform:translateY(0) scale(.98); }
+  .btn-emoji { font-size:2.2rem; display:block; margin-bottom:12px; }
+  .btn-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--gold); margin-bottom:6px; }
+  .btn-desc { font-size:.82rem; color:rgba(253,246,236,.55); line-height:1.5; }
+
+  /* MODAL */
+  .modal-overlay { position:fixed; inset:0; z-index:10000; background:rgba(0,0,0,.85); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; padding:20px; opacity:0; pointer-events:none; transition:opacity .4s; }
+  .modal-overlay.open { opacity:1; pointer-events:all; }
+  .modal-box { background:var(--deep); border:1px solid rgba(201,169,110,.3); border-radius:28px; padding:48px 40px; max-width:600px; width:100%; max-height:90vh; overflow-y:auto; transform:scale(.9); transition:transform .4s; position:relative; box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 60px rgba(244,167,185,.05); }
+  .modal-overlay.open .modal-box { transform:scale(1); }
+  .modal-close { position:absolute; top:20px; right:24px; background:none; border:none; color:rgba(255,255,255,.4); font-size:1.5rem; cursor:pointer; transition:color .2s; }
+  .modal-close:hover { color:var(--blush); }
+  .modal-title { font-family:'Playfair Display',serif; font-size:2rem; color:var(--gold); margin-bottom:20px; text-align:center; }
+
+  /* CANDLES */
+  #candle-container { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin:30px 0; }
+  .candle-wrap { display:flex; flex-direction:column; align-items:center; position:relative; }
+  .candle-body { width:20px; height:60px; background:linear-gradient(to bottom,#fff8dc,#f5c842,#e8a020); border-radius:4px 4px 2px 2px; position:relative; cursor:pointer; }
+  .candle-flame { position:absolute; top:-24px; left:50%; transform:translateX(-50%); width:12px; height:22px; background:radial-gradient(ellipse at bottom,#fff 10%,#ffdd44 40%,#ff8c00 70%,transparent 100%); border-radius:50% 50% 30% 30%; animation:flicker .15s ease infinite alternate; transition:all .5s; filter:blur(.5px); }
+  .candle-flame.blown { opacity:0; transform:translateX(-50%) scaleY(0); }
+  .candle-smoke { position:absolute; top:-36px; left:50%; transform:translateX(-50%); width:4px; height:16px; background:linear-gradient(to top,rgba(200,200,200,.6),transparent); border-radius:50%; opacity:0; transition:opacity .5s; animation:smokeDrift 1.5s ease infinite; }
+  .candle-flame.blown + .candle-smoke { opacity:1; }
+  @keyframes flicker { from{transform:translateX(-50%) scaleX(1) scaleY(1)} to{transform:translateX(-50%) scaleX(.92) scaleY(1.05)} }
+  @keyframes smokeDrift { 0%{transform:translateX(-50%) translateY(0) scaleX(1);opacity:.6} 100%{transform:translateX(-50%) translateY(-28px) scaleX(3);opacity:0} }
+  .candle-number { font-family:'Playfair Display',serif; font-size:.75rem; color:var(--gold); margin-top:6px; }
+  #blow-instruction { text-align:center; color:var(--blush); font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; margin-top:10px; }
+
+  /* HORROR */
+  #horror-modal .modal-box { background:var(--horror-bg); border-color:rgba(139,0,0,.5); }
+  #horror-modal .modal-title { color:#cc0000; }
+  .horror-emoji { font-size:4rem; animation:horrorShake .3s ease infinite; display:block; margin:20px 0; }
+  @keyframes horrorShake { 0%,100%{transform:translate(0)} 25%{transform:translate(-3px,2px)} 75%{transform:translate(3px,-2px)} }
+  .horror-text { font-family:'Playfair Display',serif; font-size:1.5rem; color:#cc0000; line-height:1.6; text-align:center; }
+  .horror-sub { font-family:'Caveat',cursive; font-size:1.2rem; color:rgba(255,50,50,.7); margin-top:16px; text-align:center; }
+  #lightning { position:fixed; inset:0; z-index:99998; background:white; opacity:0; pointer-events:none; }
+
+  /* LOVE CARDS */
+  #love-card-display { background:linear-gradient(135deg,rgba(244,167,185,.1),rgba(201,169,110,.1)); border:1px solid rgba(201,169,110,.3); border-radius:20px; padding:40px; text-align:center; min-height:180px; display:flex; align-items:center; justify-content:center; margin:20px 0; transition:opacity .4s; }
+  #love-card-text { font-family:'Cormorant Garamond',serif; font-size:1.6rem; font-style:italic; color:var(--cream); line-height:1.6; }
+
+  /* WISH */
+  #wish-textarea { width:100%; background:rgba(255,255,255,.04); border:1px solid rgba(201,169,110,.3); border-radius:16px; padding:20px; color:var(--cream); font-family:'Caveat',cursive; font-size:1.2rem; resize:none; height:140px; margin:20px 0; outline:none; transition:border-color .3s; }
+  #wish-textarea:focus { border-color:var(--rose-gold); }
+  #wish-stars { text-align:center; font-size:2.5rem; animation:starFloat 2s ease infinite; display:none; }
+  @keyframes starFloat { 0%{transform:translateY(0)} 50%{transform:translateY(-20px)} 100%{transform:translateY(0)} }
+
+  /* STAR MODAL */
+  #star-canvas-modal { width:100%; height:300px; background:radial-gradient(ellipse at center,#0d1b2a 0%,#000 100%); border-radius:20px; position:relative; overflow:hidden; margin:20px 0; }
+  .memory-star { position:absolute; border-radius:50%; background:white; cursor:pointer; animation:starTwinkle 2s ease infinite; transform:translate(-50%,-50%); }
+  .memory-star-label { position:absolute; background:rgba(13,27,42,.9); border:1px solid var(--rose-gold); border-radius:8px; padding:6px 12px; font-family:'Caveat',cursive; font-size:.9rem; color:var(--gold); white-space:nowrap; pointer-events:none; opacity:0; transition:opacity .3s; transform:translate(-50%,-130%); z-index:10; }
+  .memory-star:hover .memory-star-label { opacity:1; }
+  @keyframes starTwinkle { 0%,100%{opacity:1;transform:translate(-50%,-50%) scale(1)} 50%{opacity:.4;transform:translate(-50%,-50%) scale(.8)} }
+
+  /* CHAT */
+  .chat-container { background:#1c1c1e; border-radius:20px; padding:20px; max-height:380px; overflow-y:auto; margin:20px 0; }
+  .chat-container::-webkit-scrollbar { width:4px; }
+  .chat-container::-webkit-scrollbar-thumb { background:var(--rose-gold); border-radius:99px; }
+  .chat-bubble-wrap { display:flex; margin-bottom:16px; gap:10px; }
+  .chat-bubble-wrap.me { flex-direction:row-reverse; }
+  .chat-avatar { width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; background:linear-gradient(135deg,var(--rose-gold),var(--blush)); }
+  .chat-bubble { max-width:75%; padding:12px 16px; border-radius:18px; font-size:.9rem; line-height:1.5; }
+  .chat-bubble-wrap.them .chat-bubble { background:#2c2c2e; color:var(--cream); border-bottom-left-radius:4px; }
+  .chat-bubble-wrap.me .chat-bubble { background:linear-gradient(135deg,#007aff,#0055cc); color:white; border-bottom-right-radius:4px; }
+  .chat-time { font-size:.7rem; color:rgba(255,255,255,.3); margin-top:4px; }
+
+  /* CALL */
+  #call-screen { background:#1c1c1e; border-radius:24px; padding:40px; text-align:center; margin:20px 0; min-height:280px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .call-avatar-ring { width:100px; height:100px; border-radius:50%; background:linear-gradient(135deg,var(--blush),var(--rose-gold)); display:flex; align-items:center; justify-content:center; font-size:3rem; animation:callRing 1.5s ease infinite; margin-bottom:20px; }
+  @keyframes callRing { 0%,100%{box-shadow:0 0 0 0 rgba(244,167,185,.4)} 70%{box-shadow:0 0 0 30px rgba(244,167,185,0)} }
+  .call-status { font-family:'DM Sans',sans-serif; color:rgba(255,255,255,.5); font-size:.9rem; letter-spacing:2px; margin-bottom:20px; }
+  .call-message { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-style:italic; color:var(--blush); line-height:1.7; display:none; }
+
+  /* FORTUNE */
+  #cookie-wrap { text-align:center; padding:20px; }
+  .cookie-img { font-size:5rem; cursor:pointer; display:inline-block; animation:cookieWobble 2s ease infinite; }
+  @keyframes cookieWobble { 0%,100%{transform:rotate(0deg)} 25%{transform:rotate(10deg)} 75%{transform:rotate(-10deg)} }
+  #fortune-text { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--gold); margin-top:24px; line-height:1.7; display:none; animation:fadeUp .6s ease forwards; }
+
+  /* STORY */
+  #story-content { font-family:'Cormorant Garamond',serif; font-size:1.1rem; line-height:2; color:rgba(253,246,236,.9); }
+  #story-content p { margin-bottom:20px; }
+  .story-year { font-family:'Playfair Display',serif; font-size:2rem; color:var(--rose-gold); display:block; margin-bottom:10px; }
+
+  /* CHEST */
+  #chest-wrap { text-align:center; padding:10px 0; }
+  .chest-emoji { font-size:5rem; cursor:pointer; display:inline-block; transition:all .5s; }
+  #chest-content { display:none; margin-top:24px; animation:fadeUp .8s ease forwards; }
+  .future-memory { background:rgba(255,255,255,.04); border:1px solid rgba(201,169,110,.2); border-radius:16px; padding:20px; margin-bottom:16px; font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:rgba(253,246,236,.85); line-height:1.8; }
+  .future-memory .fm-label { font-family:'Caveat',cursive; color:var(--gold); font-size:1.1rem; margin-bottom:8px; display:block; }
+
+  /* SONG */
+  #song-player { background:#1c1c1e; border-radius:24px; padding:40px; text-align:center; margin:20px 0; }
+  .vinyl { width:120px; height:120px; border-radius:50%; background:radial-gradient(circle at center,#333 20%,#222 30%,#111 31%,#222 40%,#1a1a1a 50%,#111 51%,#222 70%,#333 71%,#222 100%); margin:0 auto 24px; display:flex; align-items:center; justify-content:center; position:relative; }
+  .vinyl.spinning { animation:spin 3s linear infinite; }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .vinyl-center { width:30px; height:30px; border-radius:50%; background:linear-gradient(135deg,var(--rose-gold),var(--blush)); position:absolute; }
+  .song-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--cream); margin-bottom:6px; }
+  .song-artist { font-size:.9rem; color:rgba(255,255,255,.5); margin-bottom:24px; }
+  .song-bar { width:100%; height:4px; background:rgba(255,255,255,.1); border-radius:99px; overflow:hidden; margin:20px 0; }
+  .song-progress { height:100%; background:linear-gradient(90deg,var(--blush),var(--rose-gold)); border-radius:99px; width:0%; transition:width .3s; }
+  .song-btn { background:linear-gradient(135deg,var(--rose-gold),var(--blush)); border:none; border-radius:50%; width:56px; height:56px; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center; margin:0 auto; box-shadow:0 8px 30px rgba(244,167,185,.4); transition:transform .2s; }
+  .song-btn:hover { transform:scale(1.1); }
+
+  /* QUOTES */
+  #quotes-section { padding:100px 20px; background:linear-gradient(180deg,transparent,rgba(244,167,185,.04),transparent); }
+  .quotes-wrap { max-width:800px; margin:0 auto; }
+  .quote-card { background:rgba(255,255,255,.03); border:1px solid rgba(201,169,110,.15); border-left:4px solid var(--rose-gold); border-radius:0 20px 20px 0; padding:32px 36px; margin-bottom:32px; opacity:0; transform:translateX(-30px); transition:all .7s ease; }
+  .quote-card.visible { opacity:1; transform:translateX(0); }
+  .quote-text { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--cream); line-height:1.8; }
+  .quote-mark { font-size:4rem; color:var(--rose-gold); opacity:.3; line-height:.5; float:left; margin-right:16px; font-family:'Playfair Display',serif; }
+
+  /* GALLERY */
+  #gallery { padding:100px 20px; max-width:1000px; margin:0 auto; }
+  .polaroid-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:30px; margin-top:50px; }
+  .polaroid { background:white; padding:16px 16px 48px; box-shadow:0 10px 40px rgba(0,0,0,.5); transform:rotate(var(--rot)); transition:transform .3s,box-shadow .3s; cursor:pointer; }
+  .polaroid:hover { transform:rotate(0deg) scale(1.05); box-shadow:0 20px 60px rgba(0,0,0,.6); }
+  .polaroid-img { width:100%; aspect-ratio:1; background:linear-gradient(135deg,#f0e6ff,#ffe4ec,#fff3e0); display:flex; align-items:center; justify-content:center; font-size:3rem; overflow:hidden; }
+  .polaroid-img img { width:100%; height:100%; object-fit:cover; }
+  .polaroid-caption { text-align:center; font-family:'Caveat',cursive; color:#333; font-size:1rem; padding-top:12px; }
+
+  /* LETTER */
+  #letter { padding:100px 20px; max-width:700px; margin:0 auto; }
+  .letter-paper { background:var(--cream); border-radius:4px; padding:60px 56px; box-shadow:0 20px 80px rgba(0,0,0,.5); position:relative; background-image:repeating-linear-gradient(transparent,transparent 27px,rgba(201,169,110,.25) 27px,rgba(201,169,110,.25) 28px); }
+  .letter-paper::before { content:''; position:absolute; top:0; left:70px; bottom:0; width:1px; background:rgba(201,169,110,.4); }
+  .letter-body { font-family:'Caveat',cursive; font-size:1.15rem; color:var(--text-dark); line-height:1.95; padding-left:20px; }
+  .letter-body p { margin-bottom:20px; }
+  .letter-body .signature { font-family:'Playfair Display',serif; font-style:italic; font-size:1.4rem; color:var(--rose-gold); margin-top:30px; }
+
+  /* CONFETTI */
+  #confetti-canvas { position:fixed; inset:0; pointer-events:none; z-index:9990; }
+
+  /* FOOTER */
+  footer { padding:60px 20px; text-align:center; border-top:1px solid rgba(201,169,110,.1); }
+  .footer-heart { font-size:2rem; animation:heartPulse 1s ease infinite; }
+  .footer-text { font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; color:rgba(253,246,236,.5); margin-top:16px; }
+
+  /* ACTION BTN */
+  .action-btn { display:inline-block; padding:14px 32px; background:linear-gradient(135deg,var(--rose-gold),var(--blush)); border:none; border-radius:50px; color:var(--navy); font-family:'DM Sans',sans-serif; font-weight:500; font-size:.95rem; cursor:pointer; margin-top:16px; transition:all .3s; box-shadow:0 8px 30px rgba(244,167,185,.3); }
+  .action-btn:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(244,167,185,.4); }
+  .action-btn.dark { background:rgba(139,0,0,.8); color:#ff8888; box-shadow:0 8px 30px rgba(139,0,0,.3); border:1px solid rgba(139,0,0,.6); }
+  .action-btn.dark:hover { box-shadow:0 16px 40px rgba(139,0,0,.5); }
+
+  /* SCROLL REVEAL */
+  .scroll-reveal { opacity:0; transform:translateY(40px); transition:all .8s ease; }
+  .scroll-reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width:768px) {
+    .distance-inner { grid-template-columns:1fr; }
+    .distance-thread { flex-direction:row; }
+    .thread-line { width:60px; height:2px; }
+    .timeline-item,.timeline-item:nth-child(odd) { flex-direction:column; align-items:flex-start; }
+    .timeline-content { width:100%; }
+    .timeline-dot { display:none; }
+    .timeline-line { left:12px; }
+    nav { display:none; }
+    .modal-box { padding:32px 24px; }
+    .letter-paper { padding:40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="lightning"></div>
+<div id="progress-bar"></div>
+<span id="heartbeat">🤍</span>
+<canvas id="stars-canvas"></canvas>
+<canvas id="confetti-canvas"></canvas>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-heart">💖</div>
+  <div class="loader-text">Preparing something just for you<span class="loader-dots"><span>.</span><span>.</span><span>.</span></span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero">Home</a>
+  <a href="#timeline">Story</a>
+  <a href="#buttons-section">Moments</a>
+  <a href="#quotes-section">Words</a>
+  <a href="#gallery">Photos</a>
+  <a href="#letter">Letter</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-greeting" id="time-greeting">Happy Birthday, My Person 🌸</div>
+  <h1 class="hero-name">Yuktaa</h1>
+  <div class="hero-sub">Happiestt 19th Birthday ✨</div>
+  <div class="hero-years">Since we were 2 years old... and still each other's person 🫶</div>
+  <div class="hero-quote">
+    "I can literally listen to you for hours and never get tired.<br>
+    There's just something about you that feels like peace ❤️"
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>scroll</span></div>
+</section>
+
+<!-- COUNTER -->
+<div id="counter-section">
+  <div id="birthday-counter">🎂 Loading...</div>
+</div>
+
+<!-- ══ TIMELINE ══ -->
+<section id="timeline">
+  <h2 class="section-title">Our Story, Age 2 → 19</h2>
+  <div class="timeline-wrap">
+    <div class="timeline-line"></div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">2009</div>
+        <div class="timeline-age">Age 2 — The Very Beginning</div>
+        <div class="timeline-text">Two tiny humans who had absolutely no idea they were meeting their person. We probably argued over a toy first. And somehow, that was the start of everything beautiful. 🍼</div>
+      </div>
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2012</div>
+        <div class="timeline-age">Age 5 — The School Era</div>
+        <div class="timeline-text">Running, laughing, causing chaos together (Mere ghr vala jhulaa). We were already each other's comfort person before we even had words for it. 🎒✏️</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">2013</div>
+        <div class="timeline-age">Age 6 — The Inside Jokes Era</div>
+        <div class="timeline-text">We had our own world. Our own language. Our own jokes that made zero sense to anyone else. People probably stared. We didn't care. 😂</div>
+      </div>
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2023</div>
+        <div class="timeline-age">Age 16 — The Deep Talks Begin</div>
+        <div class="timeline-text">Conversations shifted. From silly to real to raw. That's when I realized — this isn't just friendship. This is rare. This is the kind of rare you don't find twice. 🌙</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-age">Age 17 — Through Hard Times</div>
+        <div class="timeline-text">The world got difficult. But you were there. Always there. You showed up — through screens, through distance, through everything. That's who you are. Strong, brave, present. 💪</div>
+      </div>
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-age">Age 17 — The Horror Dreams Tradition 👻</div>
+        <div class="timeline-text">The weirdest and most "us" tradition was born. Every night before sleep: horror dreams. Strange? Yes. Absolutely us? Yes. I wouldn't change a single spooky night. 😂</div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-age">Age 18 — Different Paths, Same Bond</div>
+        <div class="timeline-text">Different universities. Different cities. Different lives. But every video call felt like no time had passed at all. Because with you — distance is just a number. 📞💖</div>
+      </div>
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-spacer"></div><div class="timeline-dot"></div><div class="timeline-spacer"></div>
+      <div class="timeline-content">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-age">Age 19 — Today. Right Here. Right Now. 🎂</div>
+        <div class="timeline-text">And here we are. 19. Still each other's person. Still making no sense together. Still understanding each other without words. Still the rarest bond I've ever known. Happiest Birthday. 🌸</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ DISTANCE ══ -->
+<section id="distance">
+  <h2 class="section-title scroll-reveal">Different Universities. Same Universe.</h2>
+  <div class="distance-inner scroll-reveal">
+    <div class="city-card">
+      <div class="city-emoji">🎓</div>
+      <!-- Replace with your university city -->
+      <div class="city-label">His University</div>
+      <div class="city-name">Indore </div>
+    </div>
+    <div class="distance-thread">
+      <div class="thread-line"></div>
+      <div class="thread-heart">💖</div>
+      <div class="thread-line"></div>
+    </div>
+    <div class="city-card">
+      <div class="city-emoji">🎓</div>
+      <!-- Replace with her university city -->
+      <div class="city-label">Her University</div>
+      <div class="city-name">Jaipur</div>
+    </div>
+  </div>
+  <div class="distance-quote scroll-reveal">
+    "Every video call feels like no time has passed(apni bate kabhi kthm nhi hoge hihi).<br>Because with you — distance is just a number."
+  </div>
+</section>
+
+<!-- ══ BUTTONS ══ -->
+<section id="buttons-section">
+  <h2 class="section-title scroll-reveal">Our Little Universe</h2>
+  <div class="btn-grid">
+    <div class="feature-btn" onclick="openModal('candle-modal')">
+      <span class="btn-emoji">🕯️</span>
+      <div class="btn-title">Blow the Candles</div>
+      <div class="btn-desc">Make a wish and blow out your 19 candles, one by one.</div>
+    </div>
+    <div class="feature-btn" onclick="openHorrorModal()">
+      <span class="btn-emoji">😱</span>
+      <div class="btn-title">Wish Horror Dreams</div>
+      <div class="btn-desc">Our weirdest and most "us" tradition. Sweet horror dreams, bestie! 👻</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('call-modal')">
+      <span class="btn-emoji">📞</span>
+      <div class="btn-title">Memory Call</div>
+      <div class="btn-desc">Ring ring... someone special is trying to reach you right now.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('story-modal')">
+      <span class="btn-emoji">💌</span>
+      <div class="btn-title">Open Our Story</div>
+      <div class="btn-desc">Unfold the scroll of 17 years of us, written just for you.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('chat-modal')">
+      <span class="btn-emoji">💬</span>
+      <div class="btn-title">Our Chat Wall</div>
+      <div class="btn-desc">The messages that live rent-free in my heart. Our iMessage wall.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('song-modal')">
+      <span class="btn-emoji">🎵</span>
+      <div class="btn-title">Play Our Song</div>
+      <div class="btn-desc">Every friendship has a soundtrack. Press play and feel it.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('wish-modal')">
+      <span class="btn-emoji">⭐</span>
+      <div class="btn-title">Make a Wish</div>
+      <div class="btn-desc">Type your secret birthday wish. Watch it fly into the stars.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('love-modal')">
+      <span class="btn-emoji">💖</span>
+      <div class="btn-title">Things I Love About You</div>
+      <div class="btn-desc">Click to reveal a new reason — there are more than you know.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('stars-modal')">
+      <span class="btn-emoji">🌙</span>
+      <div class="btn-title">Stargazing Together</div>
+      <div class="btn-desc">Each star holds a memory of ours. Hover to remember. ✨</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('chest-modal')">
+      <span class="btn-emoji">📖</span>
+      <div class="btn-title">Unlived Memories</div>
+      <div class="btn-desc">A treasure chest of everything we're still going to do together.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('cake-modal')">
+      <span class="btn-emoji">🎂</span>
+      <div class="btn-title">Sing Happy Birthday</div>
+      <div class="btn-desc">Let's make it official. You deserve a grand birthday moment.</div>
+    </div>
+    <div class="feature-btn" onclick="openModal('fortune-modal')">
+      <span class="btn-emoji">🔮</span>
+      <div class="btn-title">Fortune Cookie</div>
+      <div class="btn-desc">Crack it open — your 19th year's destiny is waiting inside.</div>
+    </div>
+    <div class="feature-btn" onclick="launchConfetti()">
+      <span class="btn-emoji">🎉</span>
+      <div class="btn-title">Celebrate!</div>
+      <div class="btn-desc">Because you deserve all the confetti in the world, always.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUOTES ══ -->
+<section id="quotes-section">
+  <h2 class="section-title">Words From My Heart</h2>
+  <div class="quotes-wrap">
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>I can literally listen to you for hours and never get tired. There's just something about you that feels like peace ❤️</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>The way we understand each other without even saying anything sometimes… that connection is rare, and it means everything to me.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>Since we were 2. Imagine that. Two tiny humans who had no idea they'd still be each other's person 17 years later.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>You are the childhood I never want to forget. The laugh track to every good memory I have.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>Pretty. Cute. Strong. Brave. And somehow, still my best friend. The universe knew what it was doing when it picked you.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>Different universities. Same universe. No distance has ever been able to touch what we have.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>Our horror dreams tradition is the weirdest and most "us" thing ever. I wouldn't trade it for anything.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>Some people walk into your life and become a chapter. You walked in at age 2 and became the whole book.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>Every video call ends and I sit there smiling at a blank screen for a few seconds. That's you. That's what you do to people.</div></div>
+    <div class="quote-card"><div class="quote-text"><span class="quote-mark">"</span>I hope your 19th year is as beautiful as you are — and trust me, that's a very high bar. Happy Birthday, my person. 🌸</div></div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section id="gallery">
+  <h2 class="section-title scroll-reveal">Our Polaroid Wall 📸</h2>
+  <p style="text-align:center;color:rgba(253,246,236,.5);font-family:'Caveat',cursive;font-size:1.1rem;margin-top:-30px;margin-bottom:10px" class="scroll-reveal">
+    Hover each photo to feel the warmth 💕 — Replace emoji with your actual photos!
+  </p>
+  <div class="polaroid-grid scroll-reveal">
+    <!-- 🖼️ Replace each polaroid-img content with: <img src="your-photo.jpg" alt="caption"> -->
+    <div class="polaroid" style="--rot:-3deg"><div class="polaroid-img"><img src="yuk/photo.jpg" alt="Add your photo 💕"></div><div class="polaroid-caption">video calls 💕</div></div>
+    <div class="polaroid" style="--rot:2deg"><div class="polaroid-img"><img src="yuk/usalways.jpg" alt="Us, always 🌸"></div><div class="polaroid-caption">Us, always 🌸</div></div>
+    <div class="polaroid" style="--rot:-1.5deg"><div class="polaroid-img"><img src="yuk/happymemo.jpg" alt="Happy memories 🎊"></div><div class="polaroid-caption">Happy memories 🎊</div></div>
+    <div class="polaroid" style="--rot:3deg"><div class="polaroid-img"><img src="yuk/day.jpg" alt="Since day one ✨"></div><div class="polaroid-caption">Since day one ✨</div></div>
+    <div class="polaroid" style="--rot:-2deg"><div class="polaroid-img"><img src="yuk/besthuman.jpg" alt="Best humans 💖"></div><div class="polaroid-caption">Best humans 💖</div></div>
+    <div class="polaroid" style="--rot:1deg"><div class="polaroid-img"><img src="yuk/hbd.jpg" alt="17 years of this 🌙"></div><div class="polaroid-caption">Sunder Apsara 🌙</div></div>
+  </div>
+</section>
+
+<!-- ══ LETTER ══ -->
+<section id="letter">
+  <h2 class="section-title scroll-reveal">A Letter, Just For You</h2>
+  <div class="letter-paper scroll-reveal">
+    <div class="letter-body">
+      <p>Dear you,</p>
+      <p>I've been trying to figure out how to write this for a while now. But I think I've been overthinking it — because with you, words have never really been the point. We understand each other without them, remember?</p>
+      <p>But today is your birthday. Your 19th. And I want you to know what that means to me.</p>
+      <p>It means 17 years of knowing you. 17 years of finding my person over and over again in you — through every phase, every change, every version of who we were becoming. You were there when I was just a small, chaotic little kid, and you're here now, as I'm becoming whoever I'm becoming.</p>
+      <p>You are genuinely one of the most beautiful humans I've ever known. Not just because you're pretty — though you are, obviously — but because of the way you carry yourself. Strong. Brave. Present. The way you can make someone feel completely seen without even trying.</p>
+      <p>I think about how crazy it is that this all started at age 2. Tu meri first friend thi, and somehow the universe just decided — yeah, these two. These two are going to be something.</p>
+      <p>Different universities now. Different cities. But every single video call, every late-night message, every "goodnight, sweet horror dreams" just proves — what we have doesn't need geography. It just needs us.</p>
+      <p>I hope this year — your 19th — is the most beautiful one yet. I hope it's full of laughter, breakthroughs, and moments that make you feel completely alive.</p>
+      <p>Happy birthday, my person. You deserve the whole universe. 🌸</p>
+      <p class="signature">— Always yours, from age 2 💖</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-heart">💖</div>
+  <div class="footer-text">
+    "You are the childhood I never want to forget.<br>Happy 19th Birthday, my person."
+  </div>
+  <div style="margin-top:20px;font-size:.75rem;color:rgba(255,255,255,.15);letter-spacing:2px">
+    MADE WITH LOVE • SINCE AGE 2 • FOREVER
+  </div>
+</footer>
+
+<!-- ══════════ MODALS ══════════ -->
+
+<!-- CANDLE -->
+<div class="modal-overlay" id="candle-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('candle-modal')">✕</button>
+    <div class="modal-title">🕯️ Blow Your 19 Candles</div>
+    <div id="candle-container"></div>
+    <div id="blow-instruction">Click each candle to blow it out 💨</div>
+    <div id="all-blown" style="display:none;text-align:center">
+      <div style="font-size:3rem;margin:20px 0">🎉🎂✨</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--blush);line-height:1.7">All 19 blown! Your wish is flying to the stars right now.<br>This year is yours. Completely, beautifully yours. 🌟</div>
+    </div>
+  </div>
+</div>
+
+<!-- HORROR -->
+<div class="modal-overlay" id="horror-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('horror-modal')">✕</button>
+    <div class="modal-title">👻 Horror Dreams</div>
+    <div id="horror-content">
+      <span class="horror-emoji">😱</span>
+      <div class="horror-text">Sweet horror dreams, bestie!<br>May your dreams be filled with the most gloriously terrible monsters, jump scares, and plot twists 👹</div>
+      <div class="horror-sub">Our weirdest tradition. Our most "us" thing.<br>I wouldn't change a single spooky night. 🖤</div>
+      <div style="text-align:center"><button class="action-btn dark" style="margin-top:24px" onclick="triggerHorror()">🌩️ Trigger the Storm</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- CALL -->
+<div class="modal-overlay" id="call-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('call-modal')">✕</button>
+    <div class="modal-title">📞 Memory Call</div>
+    <div id="call-screen">
+      <div class="call-avatar-ring">🌸</div>
+      <div class="call-status" id="call-status">CONNECTING...</div>
+      <div class="call-message" id="call-message">
+        "Hey, it's me Sameer (bantuu). I know, I know — you already knew it was me before I even said anything. That's kind of our whole thing.
+        <br><br>I just called to say — you're my favourite call of every day. Every single one.
+        <br><br>Happy Birthday, my person. I miss your face already. 💖"
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="modal-overlay" id="story-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('story-modal')">✕</button>
+    <div class="modal-title">💌 Our Story</div>
+    <div id="story-content">
+      <p><span class="story-year">Age 2 —</span>Two tiny strangers became inseparable before they even understood what friendship meant. Maybe that's the purest kind.</p>
+      <p><span class="story-year">Age 5 —</span>School, crayons, and always finding each other in the crowd. The original comfort person.</p>
+      <p><span class="story-year">Age 9 —</span>The era of inside jokes that still make no sense to anyone but us. The ones we'll still be laughing at when we're 90.</p>
+      <p><span class="story-year">Age 12 —</span>Late nights. Deep talks. The kind that shift something in you. That's when I knew — this is rare.</p>
+      <p><span class="story-year">Age 15 —</span>Hard seasons. But you were there through every single one. Strong, brave, present. My anchor.</p>
+      <p><span class="story-year">Age 17 —</span>The horror dreams tradition begins. Chaotic. Weird. Completely ours. I love it.</p>
+      <p><span class="story-year">Age 18 —</span>University. Distance. But every video call proved — this bond doesn't need geography. It just needs us.</p>
+      <p><span class="story-year">Age 19 —</span>Today. We're still here. Still each other's person. Still making complete and absolutely no sense at the same time. Happy Birthday. 🌸</p>
+    </div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div class="modal-overlay" id="chat-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('chat-modal')">✕</button>
+    <div class="modal-title">💬 Our Chat Wall</div>
+    <div style="text-align:center;margin:20px 0"><img src="yuk/firstchat.jpg" alt="Our Chat" style="max-width:100%;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.4)"></div>
+    <p style="text-align:center;font-family:'Caveat',cursive;color:rgba(255,255,255,.4);font-size:.9rem;margin-top:12px">Some of our best moments 💕</p>
+  </div>
+</div>
+
+<!-- SONG -->
+<div class="modal-overlay" id="song-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('song-modal')">✕</button>
+    <div class="modal-title">🎵 Our Song</div>
+    <div id="song-player">
+      <audio id="audio-player" src="yuk/song.mp3"></audio>
+      <div class="vinyl" id="vinyl"><div class="vinyl-center"></div></div>
+      <div class="song-title">Our Song 🎵</div>
+      <div class="song-artist">Playing for you 💕</div>
+      <div class="song-bar"><div class="song-progress" id="song-prog"></div></div>
+      <button class="song-btn" onclick="toggleSong()" id="play-btn">▶</button>
+      <div style="font-family:'Caveat',cursive;color:rgba(255,255,255,.4);font-size:.9rem;margin-top:20px">Every time this plays, I think of you. 💖</div>
+    </div>
+  </div>
+</div>
+
+<!-- WISH -->
+<div class="modal-overlay" id="wish-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('wish-modal')">✕</button>
+    <div class="modal-title">⭐ Make a Wish</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:rgba(253,246,236,.7);text-align:center">Write your secret birthday wish. Then send it to the stars. ✨</p>
+    <textarea id="wish-textarea" placeholder="I wish for..."></textarea>
+    <div style="text-align:center"><button class="action-btn" onclick="sendWish()">🌠 Send to the Stars</button></div>
+    <div id="wish-stars">🌟✨⭐💫🌠</div>
+    <div id="wish-confirm" style="display:none;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--blush);font-size:1.2rem;margin-top:16px;line-height:1.7">Your wish is flying up to the stars. The universe heard you. 🌙</div>
+  </div>
+</div>
+
+<!-- LOVE -->
+<div class="modal-overlay" id="love-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('love-modal')">✕</button>
+    <div class="modal-title">💖 Things I Love About You</div>
+    <div id="love-card-display"><div id="love-card-text">Press the button to reveal ✨</div></div>
+    <div style="text-align:center"><button class="action-btn" onclick="revealLove()">💖 Reveal Another</button></div>
+    <div id="love-counter" style="text-align:center;font-size:.8rem;color:rgba(255,255,255,.3);margin-top:12px">0 of 15 revealed</div>
+  </div>
+</div>
+
+<!-- STARS -->
+<div class="modal-overlay" id="stars-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('stars-modal')">✕</button>
+    <div class="modal-title">🌙 Stargazing Together</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,236,.6);text-align:center">Hover each star to find a memory 🌟</p>
+    <div id="star-canvas-modal"></div>
+    <div style="font-family:'Caveat',cursive;color:rgba(255,255,255,.4);font-size:.95rem;text-align:center;margin-top:12px">Every star above has watched us grow. 🌌</div>
+  </div>
+</div>
+
+<!-- CHEST -->
+<div class="modal-overlay" id="chest-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('chest-modal')">✕</button>
+    <div class="modal-title">📖 Unlived Memories</div>
+    <div id="chest-wrap">
+      <div class="chest-emoji" onclick="openChest()" id="chest-icon">🔒</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(253,246,236,.6);margin-top:12px;text-align:center">Click the chest to open our future 🗝️</p>
+    </div>
+    <div id="chest-content">
+      <div class="future-memory"><span class="fm-label">📍 One day —</span>We will road trip somewhere random with no plan. Windows down. Your playlist. Endless snacks. The worst navigation. The best time.</div>
+      <div class="future-memory"><span class="fm-label">🎬 One evening —</span>We'll watch a horror movie together — in the same room, finally — and you'll pretend not to be scared and I'll pretend I believe you.</div>
+      <div class="future-memory"><span class="fm-label">☕ One morning —</span>We'll sit somewhere quiet with chai and just talk. For hours. In person this time. No lag. No signal issues. Just us.</div>
+      <div class="future-memory"><span class="fm-label">🎂 Many birthdays —</span>We'll celebrate every single one. From 19 to 99. I'm not negotiating on this.</div>
+      <div class="future-memory"><span class="fm-label">🌏 Someday —</span>We'll travel somewhere we've always talked about. And it'll be even better than we imagined — because everything is better with you in it.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CAKE -->
+<div class="modal-overlay" id="cake-modal">
+  <div class="modal-box" style="text-align:center">
+    <button class="modal-close" onclick="closeModal('cake-modal')">✕</button>
+    <div class="modal-title">🎂 Happy Birthday!</div>
+    <canvas id="cake-canvas" width="400" height="300" style="max-width:100%;border-radius:16px"></canvas>
+    <div style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--blush);margin-top:20px;font-style:italic;line-height:1.5">
+      Happy 19th Birthday<br>to my favourite human 🌸
+    </div>
+    <button class="action-btn" onclick="launchConfetti()" style="margin-top:20px">🎉 Celebrate!</button>
+  </div>
+</div>
+
+<!-- FORTUNE -->
+<div class="modal-overlay" id="fortune-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('fortune-modal')">✕</button>
+    <div class="modal-title">🔮 Fortune Cookie</div>
+    <div id="cookie-wrap">
+      <div class="cookie-img" onclick="crackCookie()" id="cookie-icon">🥠</div>
+      <p style="font-family:'Caveat',cursive;color:rgba(255,255,255,.5);margin-top:12px">Tap to crack it open ✨</p>
+      <div id="fortune-text"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ JS ══════════════════ -->
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px';
+  const t = document.createElement('div'); t.className = 'cursor-trail';
+  const c = ['#f4a7b9','#c9a96e','#e8c97e','#fde8ee'][Math.floor(Math.random()*4)];
+  t.style.cssText = `background:${c};left:${e.clientX}px;top:${e.clientY}px;width:${Math.random()*6+4}px;height:${Math.random()*6+4}px`;
+  document.body.appendChild(t); setTimeout(()=>t.remove(), 800);
+});
+
+// LOADER
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+    setTimeout(() => document.getElementById('loader').remove(), 1200);
+    initStars(); initPetals(); initClock(); initBirthdayCounter();
+    initChatWall(); initStarModal(); initCakeCanvas(); initCandles();
+  }, 2800);
+});
+
+// PROGRESS
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct+'%';
+});
+
+// STARS BG
+function initStars() {
+  const canvas = document.getElementById('stars-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+  const stars = Array.from({length:150}, ()=>({
+    x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+    r:Math.random()*1.5+.3, a:Math.random(), speed:Math.random()*.005+.002
+  }));
+  (function draw() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s => {
+      s.a += s.speed; if(s.a>1||s.a<0) s.speed=-s.speed;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${Math.abs(s.a)})`; ctx.fill();
+    }); requestAnimationFrame(draw);
+  })();
+  window.addEventListener('resize', ()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+}
+
+// PETALS
+function initPetals() {
+  const hero = document.getElementById('hero');
+  const emojis = ['🌸','🌺','✨','💫','⭐','🌟','💕','🌷'];
+  for(let i=0;i<18;i++){
+    const p = document.createElement('div'); p.className='petal';
+    p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    p.style.cssText = `left:${Math.random()*100}%;animation-duration:${Math.random()*8+6}s;animation-delay:${Math.random()*5}s;font-size:${Math.random()*.8+.6}rem`;
+    hero.appendChild(p);
+  }
+}
+
+// CLOCK
+function initClock() {
+  const h = new Date().getHours();
+  const g = h<12?'Good Morning':h<17?'Good Afternoon':'Good Evening';
+  document.getElementById('time-greeting').textContent = g+', Birthday Girl 🌸';
+}
+
+// BIRTHDAY COUNTER
+function initBirthdayCounter() {
+  function update() {
+    const now = new Date();
+    // 🎂 Change month (0-indexed) and day to her actual birthday
+    const bday = new Date(now.getFullYear(), 3, 8); // April 8 — update this!
+    if(now > bday) bday.setFullYear(bday.getFullYear()+1);
+    const diff = bday - now;
+    if(diff <= 0) { document.getElementById('birthday-counter').innerHTML='🎉 It\'s finally HERE! Happy Birthday! 🎂💖🎊'; return; }
+    const d=Math.floor(diff/(1e3*60*60*24)), hr=Math.floor((diff%(1e3*60*60*24))/(1e3*60*60));
+    const mn=Math.floor((diff%(1e3*60*60))/(1e3*60)), sc=Math.floor((diff%(1e3*60))/1e3);
+    document.getElementById('birthday-counter').innerHTML = `🎂 Birthday in: <b style="color:var(--blush)">${d}d ${hr}h ${mn}m ${sc}s</b> — Can't wait! 💖`;
+    setTimeout(update, 1000);
+  }
+  update();
+}
+
+// SCROLL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.15});
+document.querySelectorAll('.scroll-reveal,.timeline-item,.quote-card').forEach(el=>observer.observe(el));
+
+// MODALS
+function openModal(id) {
+  document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden';
+  if(id==='call-modal') startCall();
+  if(id==='song-modal') resetSong();
+  if(id==='cake-modal') initCakeCanvas();
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open'); document.body.style.overflow='';
+  if(id==='song-modal') stopSong();
+}
+document.querySelectorAll('.modal-overlay').forEach(m => {
+  m.addEventListener('click', e => { if(e.target===m) closeModal(m.id); });
+});
+
+// CANDLES
+function initCandles() {
+  const c = document.getElementById('candle-container'); c.innerHTML='';
+  for(let i=1;i<=19;i++){
+    c.innerHTML += `<div class="candle-wrap"><div class="candle-body" onclick="blowCandle(this,${i})"><div class="candle-flame" id="flame-${i}"></div><div class="candle-smoke"></div></div><div class="candle-number">${i}</div></div>`;
+  }
+}
+let blownCount=0;
+function blowCandle(body,n) {
+  const f=document.getElementById('flame-'+n); if(f.classList.contains('blown')) return;
+  f.classList.add('blown'); blownCount++;
+  if(blownCount===19) setTimeout(()=>{ document.getElementById('blow-instruction').style.display='none'; document.getElementById('all-blown').style.display='block'; launchConfetti(); },600);
+}
+
+// HORROR
+function openHorrorModal() { openModal('horror-modal'); }
+function triggerHorror() {
+  const l=document.getElementById('lightning'); let n=0;
+  (function fl(){ l.style.opacity='.9'; setTimeout(()=>{l.style.opacity='0'; if(++n<6) setTimeout(fl,Math.random()*300+80);},80); })();
+}
+
+// CALL
+function startCall() {
+  const status=document.getElementById('call-status'), msg=document.getElementById('call-message');
+  status.textContent='CONNECTING...'; msg.style.display='none'; status.style.display='block';
+  const steps=['CONNECTING...','RINGING... 📳','CONNECTING...','CONNECTED 💚'];
+  let i=0; const iv=setInterval(()=>{
+    status.textContent=steps[i++];
+    if(i>=steps.length){ clearInterval(iv); setTimeout(()=>{ status.style.display='none'; msg.style.display='block'; },300); }
+  },1000);
+}
+
+// SONG
+let songPlaying=false, songIv=null;
+function toggleSong() {
+  const audio=document.getElementById('audio-player');
+  if(!audio)return;
+  songPlaying=!songPlaying; document.getElementById('play-btn').textContent=songPlaying?'⏸':'▶';
+  document.getElementById('vinyl').className=songPlaying?'vinyl spinning':'vinyl';
+  if(songPlaying){ audio.play(); updateSongProgress(); }
+  else { audio.pause(); clearInterval(songIv); }
+}
+function updateSongProgress() {
+  const audio=document.getElementById('audio-player');
+  if(!audio || !songPlaying) return;
+  const pct=(audio.currentTime/audio.duration)*100;
+  document.getElementById('song-prog').style.width=pct+'%';
+  songIv=requestAnimationFrame(updateSongProgress);
+}
+function resetSong(){
+  const audio=document.getElementById('audio-player');
+  if(audio){ audio.pause(); audio.currentTime=0; }
+  songPlaying=false; clearInterval(songIv); document.getElementById('play-btn').textContent='▶'; document.getElementById('vinyl').className='vinyl'; document.getElementById('song-prog').style.width='0%';
+}
+function stopSong(){
+  const audio=document.getElementById('audio-player');
+  if(audio) audio.pause();
+  songPlaying=false; clearInterval(songIv); if(document.getElementById('vinyl'))document.getElementById('vinyl').className='vinyl';
+}
+
+// WISH
+function sendWish() {
+  if(!document.getElementById('wish-textarea').value.trim()) return;
+  document.getElementById('wish-stars').style.display='block';
+  document.getElementById('wish-confirm').style.display='block';
+  document.getElementById('wish-textarea').disabled=true;
+}
+
+// LOVE CARDS
+const loveThings = [
+  "The way you make everyone around you feel safe and seen — effortlessly, without trying. 🌸",
+  "Your laugh. I could hear it on my worst day and suddenly everything would be okay. 😊",
+  "How brave you are — even on the days you don't feel it. Especially those days. 💪",
+  "The way you understand me without words. That's rare. That's you. 🤍",
+  "Your strength — quiet but unshakeable. You carry so much and still show up for everyone. 💫",
+  "How genuinely beautiful you are — inside and out. It radiates. People feel it when you walk in. 🌺",
+  "The way our friendship survived time, distance, life changes — and got stronger every time. 💖",
+  "Your honesty. You always tell me the truth, even when I don't want to hear it. That's real love. ✨",
+  "How interesting you are. Talking to you is never, ever boring. Not once in 17 years. 🌟",
+  "The fact that you were my first friend and still my favourite person. 🌷",
+  "Your voice when you're excited about something on a video call. Pure absolute magic. 📞",
+  "How you're both soft and strong at the same time — that's rare. You make it look easy. 🦋",
+  "How much you've grown from that tiny 2-year-old to this incredible 19-year-old. I'm so proud. 🥹",
+  "The fact that you're my first memory of a true, real, deep friendship. What a gift. 🌷",
+  "You. Just you. All of it. Every single part. Always. 💕"
+];
+let loveIdx=0;
+function revealLove() {
+  if(loveIdx>=loveThings.length) loveIdx=0;
+  const card=document.getElementById('love-card-display'); card.style.opacity='0';
+  setTimeout(()=>{ document.getElementById('love-card-text').textContent=loveThings[loveIdx++]; card.style.opacity='1'; card.style.transition='opacity .5s'; document.getElementById('love-counter').textContent=`${Math.min(loveIdx,loveThings.length)} of ${loveThings.length} revealed`; },300);
+}
+
+// STARS MODAL
+const memories = [
+  {x:15,y:20,label:"Age 2 — when we met 💫"},{x:30,y:55,label:"Our first laugh together 😄"},
+  {x:55,y:15,label:"School days chaos 🎒"},{x:70,y:40,label:"The deepest talk we ever had 🌙"},
+  {x:85,y:70,label:"Horror dreams tradition 👻"},{x:20,y:75,label:"The video call till 3am 📞"},
+  {x:50,y:60,label:"When you were brave for both of us 💪"},{x:78,y:20,label:"Different unis, same bond ❤️"},
+  {x:40,y:35,label:"The laugh I'll never forget 🌟"},{x:60,y:80,label:"Your 19th birthday ✨"},
+];
+function initStarModal() {
+  const wrap=document.getElementById('star-canvas-modal'); wrap.innerHTML='';
+  memories.forEach(m=>{
+    const star=document.createElement('div'); star.className='memory-star';
+    star.style.cssText=`left:${m.x}%;top:${m.y}%;width:${Math.random()*6+5}px;height:${Math.random()*6+5}px;animation-delay:${Math.random()*2}s`;
+    const label=document.createElement('div'); label.className='memory-star-label'; label.textContent=m.label;
+    star.appendChild(label); wrap.appendChild(star);
+  });
+}
+
+// CHEST
+function openChest() {
+  document.getElementById('chest-icon').textContent='🎁';
+  document.getElementById('chest-content').style.display='block';
+}
+
+// CAKE
+function initCakeCanvas() {
+  const canvas=document.getElementById('cake-canvas'); if(!canvas) return;
+  const ctx=canvas.getContext('2d'), w=400, h=300;
+  ctx.clearRect(0,0,w,h);
+  // Plate
+  ctx.fillStyle='rgba(44,26,14,.5)'; ctx.beginPath(); ctx.ellipse(w/2,h-18,155,16,0,0,Math.PI*2); ctx.fill();
+  // Layer 1
+  const g1=ctx.createLinearGradient(w/2-125,0,w/2+125,0);
+  g1.addColorStop(0,'#c9a96e'); g1.addColorStop(.5,'#f4a7b9'); g1.addColorStop(1,'#c9a96e');
+  ctx.fillStyle=g1; ctx.beginPath(); ctx.roundRect(w/2-125,h-160,250,140,8); ctx.fill();
+  // Layer 2
+  ctx.fillStyle='#e8c97e'; ctx.beginPath(); ctx.roundRect(w/2-95,h-220,190,64,8); ctx.fill();
+  // Layer 3
+  ctx.fillStyle='#fde8ee'; ctx.beginPath(); ctx.roundRect(w/2-60,h-272,120,56,8); ctx.fill();
+  // Frosting drips L1
+  ctx.fillStyle='rgba(255,255,255,.85)';
+  for(let i=0;i<5;i++){ctx.beginPath();ctx.arc(w/2-100+i*50,h-160,11,Math.PI,0);ctx.fill();}
+  for(let i=0;i<4;i++){ctx.beginPath();ctx.arc(w/2-72+i*48,h-220,9,Math.PI,0);ctx.fill();}
+  ctx.fillStyle='rgba(255,255,255,.7)';
+  for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(w/2-40+i*40,h-272,7,Math.PI,0);ctx.fill();}
+  // 19
+  ctx.fillStyle='#8b0000'; ctx.font='bold 38px Georgia,serif'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('19',w/2,h-95);
+  // Candles
+  [w/2-38,w/2,w/2+38].forEach(cx=>{
+    ctx.fillStyle='#f5c842'; ctx.fillRect(cx-5,h-312,10,46);
+    ctx.fillStyle='rgba(255,220,50,.9)'; ctx.beginPath(); ctx.ellipse(cx,h-320,5,10,0,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.9)'; ctx.beginPath(); ctx.ellipse(cx,h-324,2,5,0,0,Math.PI*2); ctx.fill();
+  });
+  ctx.font='14px serif'; ctx.textBaseline='alphabetic';
+  ['💕','🌸','✨'].forEach((e,i)=>{ ctx.fillText(e,w/2-80+i*80,h-185); });
+}
+
+// CONFETTI
+function launchConfetti() {
+  const canvas=document.getElementById('confetti-canvas'); canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+  const ctx=canvas.getContext('2d');
+  const pieces=Array.from({length:200},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height-canvas.height,r:Math.random()*8+4,color:['#f4a7b9','#c9a96e','#fde8ee','#e8c97e','#fff','#ff6b9d'][Math.floor(Math.random()*6)],vx:(Math.random()-.5)*4,vy:Math.random()*4+2,rot:Math.random()*360,rotV:(Math.random()-.5)*5}));
+  let frame=0;
+  (function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.rot+=p.rotV; if(p.y>canvas.height){p.y=-10;p.x=Math.random()*canvas.width;} ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color; ctx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2); ctx.restore(); });
+    if(++frame<300) requestAnimationFrame(animate); else ctx.clearRect(0,0,canvas.width,canvas.height);
+  })();
+}
+
+// CHAT WALL
+function initChatWall() {
+  const wall=document.getElementById('chat-wall');
+  if(!wall) return;
+  const chats=[
+    {s:'them',m:"Are you awake?? 👀",t:"2:13 AM"},{s:'me',m:"Always for you 😂 what happened",t:"2:14 AM"},
+    {s:'them',m:"Nothing I just wanted to talk 🥺",t:"2:14 AM"},{s:'me',m:"Then talk. I'm here. Always. 💖",t:"2:15 AM"},
+    {s:'them',m:"Ok goodnight sweet horror dreams 👻",t:"3:47 AM"},{s:'me',m:"HORROR DREAMS TO YOU TOO 💀😂",t:"3:47 AM"},
+    {s:'them',m:"I miss you like crazy today 🥺",t:"6:22 PM"},{s:'me',m:"Different universities. Same universe. Miss you more ❤️",t:"6:23 PM"},
+    {s:'them',m:"Can we call? I just wanna see your face 😂",t:"9:14 PM"},{s:'me',m:"Calling right now 📞",t:"9:14 PM"},
+    {s:'them',m:"You always know exactly what to say",t:"11:02 PM"},{s:'me',m:"And you always know how to make me smile without saying anything ✨",t:"11:03 PM"},
+  ];
+  wall.innerHTML='';
+  chats.forEach((c,i)=>{
+    const wrap=document.createElement('div'); wrap.className=`chat-bubble-wrap ${c.s==='me'?'me':'them'}`;
+    wrap.style.cssText='opacity:0;transition:opacity .4s ease'; wrap.style.transitionDelay=i*.1+'s';
+    wrap.innerHTML=`<div class="chat-avatar">${c.s==='me'?'😊':'🌸'}</div><div><div class="chat-bubble">${c.m}</div><div class="chat-time">${c.t}</div></div>`;
+    wall.appendChild(wrap); setTimeout(()=>wrap.style.opacity='1',100+i*100);
+  });
+}
+
+// FORTUNE
+const fortunes=[
+  "Your 19th year will hold the laughter you didn't know you needed, the courage you didn't know you had, and the love that was always there waiting to be noticed. 🌸",
+  "The universe has been taking notes on who you are since you were 2. Your 19th year is it finally writing back. ✨",
+  "You are not at the beginning of your story — you are at the most beautiful chapter yet. The best parts are still being written. 📖",
+  "This year, something you've been quietly hoping for will quietly happen. Stay open. Stay you. 💫",
+  "The people who love you most already know how rare you are. This year, you'll start to see it too. 💖",
+  "Horror dreams and all — you are someone's peace, someone's home, someone's favourite person. Never forget that. 🌙",
+];
+let cookieOpened=false;
+function crackCookie(){ if(cookieOpened)return; cookieOpened=true; document.getElementById('cookie-icon').textContent='✨'; const ft=document.getElementById('fortune-text'); ft.textContent=fortunes[Math.floor(Math.random()*fortunes.length)]; ft.style.display='block'; }
+
+// HEARTBEAT CYCLE
+const hearts=['🤍','💗','💓','💖','💝','💕','❤️','🩷']; let hIdx=0;
+setInterval(()=>{ document.getElementById('heartbeat').textContent=hearts[hIdx++%hearts.length]; },1200);
+</script>
+</body>
+</html>
